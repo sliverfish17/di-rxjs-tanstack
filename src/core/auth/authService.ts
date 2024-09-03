@@ -1,17 +1,19 @@
 import { BehaviorSubject } from 'rxjs';
 
-class AuthService {
+export class AuthService {
   private authState = new BehaviorSubject<boolean>(false);
 
   get isAuthenticated() {
     return this.authState.asObservable();
   }
 
-  login() {
+  login(token: string) {
+    localStorage.setItem('auth_token', token);
     this.authState.next(true);
   }
 
   logout() {
+    localStorage.removeItem('auth_token');
     this.authState.next(false);
   }
 }
