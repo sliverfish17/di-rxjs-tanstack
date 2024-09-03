@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { AuthService } from '@/core/auth/authService';
 import { fetchMock } from '@/core/api/httpService';
-import { API_METHODS } from '@/types/apiTypes';
+import { API_METHODS, LoginEntries } from '@/types/apiTypes';
 import { container } from '@/core/di/container';
 
 export const useLogin = () => {
@@ -10,7 +10,7 @@ export const useLogin = () => {
   const navigate = useNavigate();
   const authService = container.resolve(AuthService);
 
-  const login = async (email: string, password: string) => {
+  const login = async ({ email, password }: LoginEntries) => {
     try {
       const response = await fetchMock('/login', {
         method: API_METHODS.POST,

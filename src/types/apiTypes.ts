@@ -5,3 +5,8 @@ export const enum API_METHODS {
   DELETE = 'DELETE',
   PUT = 'PUT',
 }
+
+export type LoginEntries = {
+  email: string
+  password: string
+}

@@ -1,11 +1,11 @@
-import { API_METHODS } from '@/types/apiTypes';
+import { API_METHODS, LoginEntries } from '@/types/apiTypes';
 
 const MOCKED_EMAIL = 'user@gmail.com';
 const MOCKED_PASSWORD = 'qwerty123';
 
 export const fetchMock = async (
   url: string,
-  options?: { method: API_METHODS; body: { email: string; password: string } },
+  options?: { method: API_METHODS; body: LoginEntries },
 ) => {
   if (url === '/login' && options?.method === API_METHODS.POST) {
     if (
