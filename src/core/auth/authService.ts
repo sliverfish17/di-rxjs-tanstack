@@ -1,10 +1,8 @@
+import { AuthState } from '@/types/authTypes';
 import { BehaviorSubject } from 'rxjs';
+import { injectable } from 'tsyringe';
 
-interface AuthState {
-  isAuthenticated: boolean;
-  email: string | null;
-}
-
+@injectable()
 export class AuthService {
   private authState = new BehaviorSubject<AuthState>({
     isAuthenticated: false,
@@ -28,6 +26,8 @@ export class AuthService {
   getEmail() {
     return this.authState.getValue().email;
   }
-}
 
-export const authService = new AuthService();
+  isLoggedIn() {
+    return this.authState.getValue().isAuthenticated;
+  }
+}

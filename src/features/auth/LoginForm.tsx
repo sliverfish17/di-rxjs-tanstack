@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from '@/shared/ui/Input';
 import { Button } from '@/shared/ui/Button';
-import { useLogin } from '@/core/auth/useLogin';
+import { useLogin } from '@/features/auth/useLogin';
 
 export const LoginForm: React.FC = () => {
   const { login, error } = useLogin();

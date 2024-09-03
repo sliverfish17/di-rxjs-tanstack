@@ -1,24 +1,27 @@
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { authService } from '@/core/auth/authService';
+import { AuthService } from '@/core/auth/authService';
 import { fetchMock } from '@/core/api/httpService';
+import { API_METHODS } from '@/types/apiTypes';
+import { container } from '@/core/di/container';
 
 export const useLogin = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const authService = container.resolve(AuthService); 
 
   const login = async (email: string, password: string) => {
     try {
       const response = await fetchMock('/login', {
-        method: 'POST',
+        method: API_METHODS.POST,
         body: { email, password },
       });
       authService.login(response.token, email);
       setError(null);
-      alert('Login successful!'); // Show success alert
-      navigate({ to: '/' }); // Redirect to home page
+      alert('Login successful!'); 
+      navigate({ to: '/' }); 
     } catch (err) {
-      setError('Login failed');
+      setError('Invalid credentials');
     }
   };
 
